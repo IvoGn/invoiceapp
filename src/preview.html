@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rechnungsvorschau</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="pdfViewer"></iframe>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    ipcRenderer.on('preview-pdf', (event, pdfBuffer) => {
+      // pdfBuffer als Uint8Array umwandeln
+      const uint8Array = new Uint8Array(pdfBuffer);
+
+      // Blob erstellen und URL setzen
+      const blob = new Blob([uint8Array], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      document.getElementById('pdfViewer').src = url;
+    });
+  </script>
+</body>
+</html>
