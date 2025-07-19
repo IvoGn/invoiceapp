@@ -1,0 +1,56 @@
+{
+  "name": "invoice-app",
+  "version": "1.0.0",
+  "description": "Eine App zur automatischen Rechnungserstellung",
+  "main": "src/main.js",
+  "author": "Ivo Günther",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "electron": "^37.2.1",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "pdfkit": "^0.17.1"
+  },
+  "build": {
+    "appId": "com.ivog.invoiceapp",
+    "productName": "InvoiceApp",
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "templates/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "InvoiceApp"
+    }
+  },
+  "cscLink": null,
+  "cscInstallerLink": null,
+  "signDlls": false
+}
